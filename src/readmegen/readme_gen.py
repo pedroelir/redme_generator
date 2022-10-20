@@ -155,6 +155,10 @@ def generate_readme():
     readme_file.write_text(content)
 
 
-if __name__ == "__main__":
+def main() -> None:
     ReadmeGenConfig.load_configuration()
     generate_readme()
+
+
+if __name__ == "__main__":
+    main()

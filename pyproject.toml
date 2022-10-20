@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "readmegen"
+version = "0.0.1"
+authors = [{ name = "Pedro Ramirez", email = "pedro_r_b777@hotmail.com" }]
+description = "Keyboard Mouse Interface apps."
+license = { file = "LICENSE" }
+requires-python = ">=3.10"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = ["pyyaml", "requests"]
+
+[project.scripts]
+readmegen = "readmegen.readme_gen:main"
