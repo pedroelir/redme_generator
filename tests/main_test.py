@@ -7,7 +7,7 @@ import pytest
 
 @pytest.fixture(autouse=True)
 def change_cwd(tmp_path):
-    current_dir = os.getcwd()
+    current_dir: str = os.getcwd()
     os.chdir(tmp_path)
     yield
     os.chdir(current_dir)
@@ -18,12 +18,30 @@ def test_main_no_yaml():
         main()
 
 
+def test_main_yaml_no_metadata():
+    yaml_file: Path = Path.cwd() / "sample.yaml"
+    yaml_file.touch()
+    content = """name: The best repo in the history of the World
+description: Something
+prerequisites:
+- One
+- Two
+- path/one
+- path/two
+- second/path/one
+- second/path/two
+"""
+    yaml_file.write_text(content)
+    with pytest.raises(SystemExit):
+        main()
+
+
 def test_main_populated_yaml():
-    yaml_file = Path.cwd() / "sample.yaml"
+    yaml_file: Path = Path.cwd() / "sample.yaml"
     yaml_file.touch()
     content = """metadata:
-    Title: The best repo in the history of the World
-    Description: Something
+    name: The best repo in the history of the World
+    description: Something
     prerequisites:
     - One
     - Two
