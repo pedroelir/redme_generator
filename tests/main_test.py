@@ -36,6 +36,13 @@ prerequisites:
         main()
 
 
+def test_main_yaml_no_content():
+    yaml_file: Path = Path.cwd() / "sample.yaml"
+    yaml_file.touch()
+    with pytest.raises(SystemExit):
+        main()
+
+
 def test_main_populated_yaml():
     yaml_file: Path = Path.cwd() / "sample.yaml"
     yaml_file.touch()

@@ -113,9 +113,12 @@ def generate_readme():
     if not Path(yaml_file).exists():
         sys.exit(1)
     with open(yaml_file) as file:
-        project_def: Dict = yaml.safe_load(file).get("metadata")
+        project_def: Dict = yaml.safe_load(file)
     if project_def is None:
         sys.exit(1)
+    if project_def.get("metadata") is None:
+        sys.exit(1)
+    project_def = project_def.get("metadata")
     if Path(req_file).exists():
         with open(req_file) as file:
             packages: list[str] = [line.strip().split("=")[0] for line in file]
