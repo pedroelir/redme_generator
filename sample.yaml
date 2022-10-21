@@ -1,9 +1,10 @@
-Title: The best repo in the history of the World
-Description: Something
-prerequisites:
-  - One
-  - Two
-  - path/one
-  - path/two
-  - second/path/one
-  - second/path/two
+metadata:
+  name: The best repo in the history of the World
+  description: Something
+  prerequisites:
+    - One
+    - Two
+    - path/one
+    - path/two
+    - second/path/one
+    - second/path/two

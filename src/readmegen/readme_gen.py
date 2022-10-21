@@ -10,8 +10,8 @@ class ProjectDefConst:
     README_CONF = "readmegenconf.yaml"
     YAML_FILE: str = "sample.yaml"
     PY_PKGS_FILE: str = "requirements.txt"
-    TITLE: str = "Title"
-    DESCRIPTION: str = "Description"
+    NAME: str = "name"
+    DESCRIPTION: str = "description"
     PREREQUISITES: str = "prerequisites"
     ARTIFACTORY_URL: str = "myartifactpry.mycompany.com/myorganization"
     SIMPLE_PATH: str = "python/coolpackages/simple"
@@ -24,7 +24,7 @@ class ReadmeGenConfig:
             configuration: dict[str, str] = {
                 "YAML_FILE": ProjectDefConst.YAML_FILE,
                 "PY_PKGS_FILE": ProjectDefConst.PY_PKGS_FILE,
-                "TITLE": ProjectDefConst.TITLE,
+                "NAME": ProjectDefConst.NAME,
                 "DESCRIPTION": ProjectDefConst.DESCRIPTION,
                 "PREREQUISITES": ProjectDefConst.PREREQUISITES,
                 "ARTIFACTORY_URL": ProjectDefConst.ARTIFACTORY_URL,
@@ -50,7 +50,7 @@ class ReadmeGenConfig:
         ProjectDefConst.PY_PKGS_FILE = (
             ProjectDefConst.PY_PKGS_FILE if project_conf.get("PY_PKGS_FILE") is None else project_conf["PY_PKGS_FILE"]
         )
-        ProjectDefConst.TITLE = ProjectDefConst.TITLE if project_conf.get("TITLE") is None else project_conf["TITLE"]
+        ProjectDefConst.NAME = ProjectDefConst.NAME if project_conf.get("NAME") is None else project_conf["NAME"]
         ProjectDefConst.DESCRIPTION = (
             ProjectDefConst.DESCRIPTION if project_conf.get("DESCRIPTION") is None else project_conf["DESCRIPTION"]
         )
@@ -113,15 +113,15 @@ def generate_readme():
     if not Path(yaml_file).exists():
         sys.exit(1)
     with open(yaml_file) as file:
-        project_def: Dict = yaml.safe_load(file)
+        project_def: Dict = yaml.safe_load(file).get("metadata")
     if Path(req_file).exists():
         with open(req_file) as file:
             packages: list[str] = [line.strip().split("=")[0] for line in file]
     else:
         packages = None
     content: str = ""
-    if not (project_def.get(ProjectDefConst.TITLE) is None):
-        content += f"# {project_def[ProjectDefConst.TITLE]}\n"
+    if not (project_def.get(ProjectDefConst.NAME) is None):
+        content += f"# {project_def[ProjectDefConst.NAME]}\n"
         if not (project_def.get(ProjectDefConst.DESCRIPTION) is None):
             content += f" {project_def[ProjectDefConst.DESCRIPTION]}\n\n"
     content += "## Dependencies\n"

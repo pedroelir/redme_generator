@@ -21,15 +21,16 @@ def test_main_no_yaml():
 def test_main_populated_yaml():
     yaml_file = Path.cwd() / "sample.yaml"
     yaml_file.touch()
-    content = """Title: The best repo in the history of the World
-Description: Something
-prerequisites:
-  - One
-  - Two
-  - path/one
-  - path/two
-  - second/path/one
-  - second/path/two
+    content = """metadata:
+    Title: The best repo in the history of the World
+    Description: Something
+    prerequisites:
+    - One
+    - Two
+    - path/one
+    - path/two
+    - second/path/one
+    - second/path/two
 """
     yaml_file.write_text(content)
     main()
