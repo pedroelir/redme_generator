@@ -135,7 +135,7 @@ def generate_readme():
         if not (project_def.get(ProjectDefConst.DESCRIPTION) is None):
             content += f" {project_def[ProjectDefConst.DESCRIPTION]}\n\n"
 
-    # Arifactory dependencies section
+    # Arifactory prerequisites dependencies section
     content += "## Dependencies\n"
     content += "Dependencies got from Artifactory\n"
     content += "|Dependency|Link|\n|-|-|\n"
