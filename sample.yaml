@@ -8,3 +8,6 @@ metadata:
     - path/two
     - second/path/one
     - second/path/two
+  libs_sources:
+    - github.com/awsesome/source
+    - github.com/best/source_indeed

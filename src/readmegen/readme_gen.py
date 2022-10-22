@@ -13,6 +13,7 @@ class ProjectDefConst:
     NAME: str = "name"
     DESCRIPTION: str = "description"
     PREREQUISITES: str = "prerequisites"
+    LIBS_SOURCES: str = "libs_sources"
     ARTIFACTORY_URL: str = "myartifactpry.mycompany.com/myorganization"
     SIMPLE_PATH: str = "python/coolpackages/simple"
 
@@ -27,6 +28,7 @@ class ReadmeGenConfig:
                 "NAME": ProjectDefConst.NAME,
                 "DESCRIPTION": ProjectDefConst.DESCRIPTION,
                 "PREREQUISITES": ProjectDefConst.PREREQUISITES,
+                "LIBS_SOURCES": ProjectDefConst.LIBS_SOURCES,
                 "ARTIFACTORY_URL": ProjectDefConst.ARTIFACTORY_URL,
                 "SIMPLE_PATH": ProjectDefConst.SIMPLE_PATH,
             }
@@ -58,6 +60,9 @@ class ReadmeGenConfig:
             ProjectDefConst.PREREQUISITES
             if project_conf.get("PREREQUISITES") is None
             else project_conf["PREREQUISITES"]
+        )
+        ProjectDefConst.LIBS_SOURCES = (
+            ProjectDefConst.LIBS_SOURCES if project_conf.get("LIBS_SOURCES") is None else project_conf["LIBS_SOURCES"]
         )
         ProjectDefConst.ARTIFACTORY_URL = (
             ProjectDefConst.ARTIFACTORY_URL
@@ -129,23 +134,34 @@ def generate_readme():
         content += f"# {project_def[ProjectDefConst.NAME]}\n"
         if not (project_def.get(ProjectDefConst.DESCRIPTION) is None):
             content += f" {project_def[ProjectDefConst.DESCRIPTION]}\n\n"
+
+    # Arifactory dependencies section
     content += "## Dependencies\n"
     content += "Dependencies got from Artifactory\n"
     content += "|Dependency|Link|\n|-|-|\n"
-    # content += "|for|loop|\n"
     links_content: str = ""
+    lnk_ref: int = 1
     if not (project_def.get(ProjectDefConst.PREREQUISITES) is None):
-        lnk_ref: int = 1
         for prerequisite in project_def[ProjectDefConst.PREREQUISITES]:
             content += f"|{get_friendly_name(prerequisite)}|[{get_link_name(prerequisite)}][{lnk_ref}]|\n"
             links_content += f"[{lnk_ref}]: {get_link(prerequisite)}\n"
             lnk_ref += 1
     content += "\n"
 
+    # Libriaries dependencies section
+    content += "## Libs Sources\n"
+    content += "Library sources\n"
+    content += "|Lib|Link|\n|-|-|\n"
+    sources: list[str] = project_def.get(ProjectDefConst.LIBS_SOURCES)
+    if sources:
+        for link in sources:
+            content += f"|{get_friendly_name(link)}|[{link}]({link})|\n"
+    content += "\n"
+
+    # Python dependencies section
     content += "## Python Dependencies\n"
     content += "Dependencies from python\n"
     content += "|Dependency|Link|\n|-|-|\n"
-    # content += "|for|loop|\n"
     if packages:
         for pkg in packages:
             content += f"|{pkg}|[{get_python_src(pkg)}][{lnk_ref}]|\n"

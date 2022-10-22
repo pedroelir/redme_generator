@@ -1,16 +1,7 @@
-import os
 from pathlib import Path
 from readmegen.readme_gen import main
 
 import pytest
-
-
-@pytest.fixture(autouse=True)
-def change_cwd(tmp_path):
-    current_dir: str = os.getcwd()
-    os.chdir(tmp_path)
-    yield
-    os.chdir(current_dir)
 
 
 def test_main_no_yaml():
