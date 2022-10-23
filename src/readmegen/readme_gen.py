@@ -45,7 +45,7 @@ class ReadmeGenConfig:
             conf_path = conf_in_site_pkg
         with open(conf_path) as conf_file:
             project_conf: Dict = yaml.safe_load(conf_file)
-        # print(project_conf)
+        project_conf = {} if project_conf is None else project_conf
         ProjectDefConst.YAML_FILE = (
             ProjectDefConst.YAML_FILE if project_conf.get("YAML_FILE") is None else project_conf["YAML_FILE"]
         )
