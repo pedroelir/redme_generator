@@ -1,5 +1,5 @@
 from pathlib import Path
-from readmegen.readme_gen import generate_readme
+from readmegen import readme_gen
 
 import pytest
 
@@ -7,22 +7,22 @@ import pytest
 def test_libs_sources():
     yaml_file: Path = Path.cwd() / pytest.yaml_filename
     yaml_file.touch()
-    content = """metadata:
-    name: The best repo in the history of the World
-    description: Something
-    prerequisites:
+    content = f"""metadata:
+    {readme_gen.ProjectDefConst.NAME}: The best repo in the history of the World
+    {readme_gen.ProjectDefConst.DESCRIPTION}: Something
+    {readme_gen.ProjectDefConst.PREREQUISITES}:
     - One
     - Two
     - path/one
     - path/two
     - second/path/one
     - second/path/two
-    libs_sources:
+    {readme_gen.ProjectDefConst.LIBS_SOURCES}:
     - github.com/awsesome/source
     - github.com/best/source_indeed
 """
     yaml_file.write_text(content)
-    generate_readme()
+    readme_gen.generate_readme()
     readme_file: Path = Path.cwd() / "README.md"
     assert readme_file.exists()
     lines_in_readme: list[str] = readme_file.read_text().split("\n")
