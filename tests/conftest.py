@@ -9,6 +9,7 @@ from readmegen import readme_gen
 def pytest_configure(config):
     pytest.yaml_filename = readme_gen.ProjectDefConst.YAML_FILE
     pytest.conf_finename = readme_gen.ProjectDefConst.README_CONF
+    pytest.py_pkg_finename = readme_gen.ProjectDefConst.PY_PKGS_FILE
 
 
 @pytest.fixture(autouse=True)

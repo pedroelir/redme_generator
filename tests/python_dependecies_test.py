@@ -15,7 +15,7 @@ def test_python_pkgs_dependencies_links():
     - Media/path/two
 """
     yaml_file.write_text(sample_content)
-    req_file: Path = Path.cwd() / "requirements.txt"
+    req_file: Path = Path.cwd() / pytest.py_pkg_finename
     req_file.touch()
     req_content: str = "black\nflake8==5.0.4\nsuperfakenoterealpackage\n"
     req_file.write_text(req_content)
@@ -46,7 +46,7 @@ def test_python_pkgs_pypi_no_version():
     - Media/path/two
 """
     yaml_file.write_text(sample_content)
-    req_file: Path = Path.cwd() / "requirements.txt"
+    req_file: Path = Path.cwd() / pytest.py_pkg_finename
     req_file.touch()
     req_content: str = "black\n"
     req_file.write_text(req_content)
@@ -69,7 +69,7 @@ def test_python_pkgs_pypi_with_version():
     - Media/path/two
 """
     yaml_file.write_text(sample_content)
-    req_file: Path = Path.cwd() / "requirements.txt"
+    req_file: Path = Path.cwd() / pytest.py_pkg_finename
     req_file.touch()
     req_content: str = "flake8==5.0.4\n"
     req_file.write_text(req_content)
@@ -92,7 +92,7 @@ def test_python_pkgs_no_pypi():
     - Media/path/two
 """
     yaml_file.write_text(sample_content)
-    req_file: Path = Path.cwd() / "requirements.txt"
+    req_file: Path = Path.cwd() / pytest.py_pkg_finename
     req_file.touch()
     req_content: str = "superfakenoterealpackage\n"
     req_file.write_text(req_content)
