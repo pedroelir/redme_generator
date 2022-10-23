@@ -30,7 +30,7 @@ def save_configuration():
 
 
 def test_config_file_cwd_empty():
-    config_file: Path = Path.cwd() / "readmegenconf.yaml"
+    config_file: Path = Path.cwd() / pytest.conf_finename
     config_file.touch()
     readme_gen.ReadmeGenConfig.load_configuration()
     with open(config_file) as fp:
@@ -40,18 +40,18 @@ def test_config_file_cwd_empty():
 
 def test_config_file_site_empty():
     pkg_install_path: str = inspect.getfile(readme_gen)
-    config_file_install_dir: Path = Path(pkg_install_path).parent / "readmegenconf.yaml"
+    config_file_install_dir: Path = Path(pkg_install_path).parent / pytest.conf_finename
     config_file_install_dir.touch()
     readme_gen.ReadmeGenConfig.load_configuration()
     with open(config_file_install_dir) as fp:
         config = yaml.safe_load(fp)
     assert config is not None
-    config_file_cwd: Path = Path.cwd() / "readmegenconf.yaml"
+    config_file_cwd: Path = Path.cwd() / pytest.conf_finename
     assert not config_file_cwd.exists()
 
 
 def test_config_file_populated(save_configuration):
-    config_file: Path = Path.cwd() / "readmegenconf.yaml"
+    config_file: Path = Path.cwd() / pytest.conf_finename
     config_file.touch()
     content = """ARTIFACTORY_URL: myartifactpry.personal.com/home
 DESCRIPTION: steps

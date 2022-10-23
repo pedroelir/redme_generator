@@ -8,6 +8,7 @@ from readmegen import readme_gen
 
 def pytest_configure(config):
     pytest.yaml_filename = readme_gen.ProjectDefConst.YAML_FILE
+    pytest.conf_finename = readme_gen.ProjectDefConst.README_CONF
 
 
 @pytest.fixture(autouse=True)
@@ -17,6 +18,6 @@ def change_cwd(tmp_path):
     yield
     os.chdir(current_dir)
     pkg_install_path: str = inspect.getfile(readme_gen)
-    config_file_install_dir: Path = Path(pkg_install_path).parent / "readmegenconf.yaml"
+    config_file_install_dir: Path = Path(pkg_install_path).parent / pytest.conf_finename
     if config_file_install_dir.exists():
         os.remove(config_file_install_dir)

@@ -51,6 +51,6 @@ def test_main_populated_yaml():
     yaml_file.write_text(content)
     main()
     readme_file: Path = Path.cwd() / "README.md"
-    configfile: Path = Path.cwd() / "readmegenconf.yaml"
+    configfile: Path = Path.cwd() / pytest.conf_finename
     assert configfile.exists()
     assert readme_file.exists()
