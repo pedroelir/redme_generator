@@ -50,6 +50,15 @@ def test_config_file_site_empty():
     assert not config_file_cwd.exists()
 
 
+def test_no_config_file():
+    pkg_install_path: str = inspect.getfile(readme_gen)
+    config_file_install_dir: Path = Path(pkg_install_path).parent / pytest.conf_finename
+    readme_gen.ReadmeGenConfig.load_configuration()
+    config_file_cwd: Path = Path.cwd() / pytest.conf_finename
+    assert config_file_cwd.exists()
+    assert not config_file_install_dir.exists()
+
+
 def test_config_file_populated(save_configuration):
     config_file: Path = Path.cwd() / pytest.conf_finename
     config_file.touch()
