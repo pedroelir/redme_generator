@@ -10,7 +10,7 @@ def test_main_no_yaml():
 
 
 def test_main_yaml_no_metadata():
-    yaml_file: Path = Path.cwd() / "sample.yaml"
+    yaml_file: Path = Path.cwd() / pytest.yaml_filename
     yaml_file.touch()
     content = """name: The best repo in the history of the World
 description: Something
@@ -28,14 +28,14 @@ prerequisites:
 
 
 def test_main_yaml_no_content():
-    yaml_file: Path = Path.cwd() / "sample.yaml"
+    yaml_file: Path = Path.cwd() / pytest.yaml_filename
     yaml_file.touch()
     with pytest.raises(SystemExit):
         main()
 
 
 def test_main_populated_yaml():
-    yaml_file: Path = Path.cwd() / "sample.yaml"
+    yaml_file: Path = Path.cwd() / pytest.yaml_filename
     yaml_file.touch()
     content = """metadata:
     name: The best repo in the history of the World

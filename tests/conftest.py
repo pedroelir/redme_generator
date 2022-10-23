@@ -6,6 +6,10 @@ import pytest
 from readmegen import readme_gen
 
 
+def pytest_configure(config):
+    pytest.yaml_filename = readme_gen.ProjectDefConst.YAML_FILE
+
+
 @pytest.fixture(autouse=True)
 def change_cwd(tmp_path):
     current_dir: str = os.getcwd()

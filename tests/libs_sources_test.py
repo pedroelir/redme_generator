@@ -1,9 +1,11 @@
 from pathlib import Path
 from readmegen.readme_gen import generate_readme
 
+import pytest
+
 
 def test_libs_sources():
-    yaml_file: Path = Path.cwd() / "sample.yaml"
+    yaml_file: Path = Path.cwd() / pytest.yaml_filename
     yaml_file.touch()
     content = """metadata:
     name: The best repo in the history of the World

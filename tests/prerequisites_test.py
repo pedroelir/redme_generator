@@ -2,9 +2,11 @@ from pathlib import Path
 from readmegen.readme_gen import generate_readme
 from readmegen.readme_gen import ProjectDefConst
 
+import pytest
+
 
 def test_prerequisites():
-    yaml_file: Path = Path.cwd() / "sample.yaml"
+    yaml_file: Path = Path.cwd() / pytest.yaml_filename
     yaml_file.touch()
     content = """metadata:
     name: The best repo in the history of the World
@@ -25,7 +27,7 @@ def test_prerequisites():
 
 
 def test_prerequisites_tool():
-    yaml_file: Path = Path.cwd() / "sample.yaml"
+    yaml_file: Path = Path.cwd() / pytest.yaml_filename
     yaml_file.touch()
     content = """metadata:
     name: The best repo in the history of the World
@@ -43,7 +45,7 @@ def test_prerequisites_tool():
 
 
 def test_prerequisites_media():
-    yaml_file: Path = Path.cwd() / "sample.yaml"
+    yaml_file: Path = Path.cwd() / pytest.yaml_filename
     yaml_file.touch()
     content = """metadata:
     name: The best repo in the history of the World

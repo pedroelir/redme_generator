@@ -2,9 +2,11 @@ from pathlib import Path
 from readmegen.readme_gen import generate_readme
 from readmegen.readme_gen import ProjectDefConst
 
+import pytest
+
 
 def test_python_pkgs_dependencies_links():
-    yaml_file: Path = Path.cwd() / "sample.yaml"
+    yaml_file: Path = Path.cwd() / pytest.yaml_filename
     yaml_file.touch()
     sample_content = """metadata:
     name: The best repo in the history of the World
@@ -35,7 +37,7 @@ def test_python_pkgs_dependencies_links():
 
 
 def test_python_pkgs_pypi_no_version():
-    yaml_file: Path = Path.cwd() / "sample.yaml"
+    yaml_file: Path = Path.cwd() / pytest.yaml_filename
     yaml_file.touch()
     sample_content = """metadata:
     name: The best repo in the history of the World
@@ -58,7 +60,7 @@ def test_python_pkgs_pypi_no_version():
 
 
 def test_python_pkgs_pypi_with_version():
-    yaml_file: Path = Path.cwd() / "sample.yaml"
+    yaml_file: Path = Path.cwd() / pytest.yaml_filename
     yaml_file.touch()
     sample_content = """metadata:
     name: The best repo in the history of the World
@@ -81,7 +83,7 @@ def test_python_pkgs_pypi_with_version():
 
 
 def test_python_pkgs_no_pypi():
-    yaml_file: Path = Path.cwd() / "sample.yaml"
+    yaml_file: Path = Path.cwd() / pytest.yaml_filename
     yaml_file.touch()
     sample_content = """metadata:
     name: The best repo in the history of the World
