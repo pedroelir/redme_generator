@@ -13,6 +13,7 @@ def save_configuration():
     org_libs: str = readme_gen.ProjectDefConst.LIBS_SOURCES
     org_name: str = readme_gen.ProjectDefConst.NAME
     org_prereq: str = readme_gen.ProjectDefConst.PREREQUISITES
+    org_install: str = readme_gen.ProjectDefConst.INSTALL_SETUP_PATH
     org_pypkgs: str = readme_gen.ProjectDefConst.PY_PKGS_FILE
     org_simple: str = readme_gen.ProjectDefConst.SIMPLE_PATH
     org_yaml: str = readme_gen.ProjectDefConst.YAML_FILE
@@ -24,6 +25,7 @@ def save_configuration():
     readme_gen.ProjectDefConst.LIBS_SOURCES = org_libs
     readme_gen.ProjectDefConst.NAME = org_name
     readme_gen.ProjectDefConst.PREREQUISITES = org_prereq
+    readme_gen.ProjectDefConst.INSTALL_SETUP_PATH = org_install
     readme_gen.ProjectDefConst.PY_PKGS_FILE = org_pypkgs
     readme_gen.ProjectDefConst.SIMPLE_PATH = org_simple
     readme_gen.ProjectDefConst.YAML_FILE = org_yaml
@@ -67,6 +69,7 @@ DESCRIPTION: steps
 LIBS_SOURCES: github_repos
 NAME: title
 PREREQUISITES: binary_dependencies
+INSTALL_SETUP_PATH: Final_Good_Installers
 PY_PKGS_FILE: dependencies.txt
 SIMPLE_PATH: simple/path
 YAML_FILE: Definition.yaml

@@ -14,6 +14,7 @@ class ProjectDefConst:
     DESCRIPTION: str = "description"
     PREREQUISITES: str = "prerequisites"
     LIBS_SOURCES: str = "libs_sources"
+    INSTALL_SETUP_PATH: str = "Installation_and_Setup"
     ARTIFACTORY_URL: str = "myartifactpry.mycompany.com/myorganization"
     SIMPLE_PATH: str = "python/coolpackages/simple"
 
@@ -29,6 +30,7 @@ class ReadmeGenConfig:
                 "DESCRIPTION": ProjectDefConst.DESCRIPTION,
                 "PREREQUISITES": ProjectDefConst.PREREQUISITES,
                 "LIBS_SOURCES": ProjectDefConst.LIBS_SOURCES,
+                "INSTALL_SETUP_PATH": ProjectDefConst.INSTALL_SETUP_PATH,
                 "ARTIFACTORY_URL": ProjectDefConst.ARTIFACTORY_URL,
                 "SIMPLE_PATH": ProjectDefConst.SIMPLE_PATH,
             }
@@ -64,6 +66,11 @@ class ReadmeGenConfig:
         ProjectDefConst.LIBS_SOURCES = (
             ProjectDefConst.LIBS_SOURCES if project_conf.get("LIBS_SOURCES") is None else project_conf["LIBS_SOURCES"]
         )
+        ProjectDefConst.INSTALL_SETUP_PATH = (
+            ProjectDefConst.INSTALL_SETUP_PATH
+            if project_conf.get("INSTALL_SETUP_PATH") is None
+            else project_conf["INSTALL_SETUP_PATH"]
+        )
         ProjectDefConst.ARTIFACTORY_URL = (
             ProjectDefConst.ARTIFACTORY_URL
             if project_conf.get("ARTIFACTORY_URL") is None
@@ -83,7 +90,7 @@ def get_friendly_name(path: str) -> str:
 def get_link_name(path: str) -> str:
     parts: list[str] = path.split("/")
     if len(parts) == 1:
-        return "Artifactory/InstallationSetups"
+        return f"Artifactory/{ProjectDefConst.INSTALL_SETUP_PATH}"
     else:
         return f"Artifactory/{parts[0]}"
 
@@ -91,7 +98,7 @@ def get_link_name(path: str) -> str:
 def get_link(path: str) -> str:
     parts: list[str] = path.split("/")
     if len(parts) == 1:
-        return f"{ProjectDefConst.ARTIFACTORY_URL}/InstallationSetups/{path}"
+        return f"{ProjectDefConst.ARTIFACTORY_URL}/{ProjectDefConst.INSTALL_SETUP_PATH}/{path}"
     else:
         return f"{ProjectDefConst.ARTIFACTORY_URL}/{path}"
 

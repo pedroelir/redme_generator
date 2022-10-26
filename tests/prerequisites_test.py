@@ -19,9 +19,12 @@ def test_prerequisites():
     readme_file: Path = Path.cwd() / "README.md"
     assert readme_file.exists()
     lines_in_readme: list[str] = readme_file.read_text().split("\n")
-    assert "|One|[Artifactory/InstallationSetups][1]|" in lines_in_readme
+    assert f"|One|[Artifactory/{readme_gen.ProjectDefConst.INSTALL_SETUP_PATH}][1]|" in lines_in_readme
     assert "|two|[Artifactory/Media][2]|" in lines_in_readme
-    assert f"[1]: {readme_gen.ProjectDefConst.ARTIFACTORY_URL}/InstallationSetups/One" in lines_in_readme
+    assert (
+        f"[1]: {readme_gen.ProjectDefConst.ARTIFACTORY_URL}/{readme_gen.ProjectDefConst.INSTALL_SETUP_PATH}/One"
+        in lines_in_readme
+    )
     assert f"[2]: {readme_gen.ProjectDefConst.ARTIFACTORY_URL}/Media/path/two" in lines_in_readme
 
 
@@ -39,8 +42,11 @@ def test_prerequisites_tool():
     readme_file: Path = Path.cwd() / "README.md"
     assert readme_file.exists()
     lines_in_readme: list[str] = readme_file.read_text().split("\n")
-    assert "|One|[Artifactory/InstallationSetups][1]|" in lines_in_readme
-    assert f"[1]: {readme_gen.ProjectDefConst.ARTIFACTORY_URL}/InstallationSetups/One" in lines_in_readme
+    assert f"|One|[Artifactory/{readme_gen.ProjectDefConst.INSTALL_SETUP_PATH}][1]|" in lines_in_readme
+    assert (
+        f"[1]: {readme_gen.ProjectDefConst.ARTIFACTORY_URL}/{readme_gen.ProjectDefConst.INSTALL_SETUP_PATH}/One"
+        in lines_in_readme
+    )
 
 
 def test_prerequisites_media():
